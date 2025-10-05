@@ -1,5 +1,4 @@
-import { Alert, KeyboardAvoidingView, Platform, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import { useState } from 'react';
+import { KeyboardAvoidingView, Platform, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,73 +7,19 @@ import { ThemedView } from '@/src/components/themed-view';
 import { SafeView } from '@/src/components/safe-view';
 import { FlatList } from 'react-native-gesture-handler';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { EditingId, Task } from '@/src/types/todo';
-
+import useTodo from '@/src/hooks/use-todo';
 
 export default function Home() {
-  const [task, setTask] = useState<string>('');
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [editingId, setEditingId] = useState<EditingId>(null);
-
-  // Add or update task
-  const handleAddTask = () => {
-    if (task.trim() === '') {
-      Alert.alert('Empty Task', 'Please enter a task description.');
-      return;
-    }
-
-    if (editingId) {
-      // Update existing task
-      setTasks(tasks.map(item => 
-        item.id === editingId 
-          ? { ...item, text: task }
-          : item
-      ));
-      setEditingId(null);
-    } else {
-      // Add new task
-      const newTask = {
-        id: Date.now().toString(),
-        text: task,
-        completed: false,
-        createdAt: new Date().toISOString(),
-      };
-      setTasks([newTask, ...tasks]);
-    }
-    
-    setTask('');
-  };
-
-  // Toggle task completion
-  const toggleComplete = (id: string) => {
-    setTasks(tasks.map(item =>
-      item.id === id 
-        ? { ...item, completed: !item.completed }
-        : item
-    ));
-  };
-
-  // Delete task with confirmation
-  const deleteTask = (id: string) => {
-    Alert.alert(
-      'Delete Task',
-      'Are you sure you want to delete this task?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { 
-          text: 'Delete', 
-          onPress: () => setTasks(tasks.filter(item => item.id !== id)),
-          style: 'destructive'
-        },
-      ]
-    );
-  };
-
-  // Edit task
-  const editTask = (item: Task) => {
-    setTask(item.text);
-    setEditingId(item.id);
-  };
+  const {
+    tasks,
+    task,
+    editingId,
+    handleAddTask,
+    toggleComplete,
+    editTask,
+    deleteTask,
+    setTask
+  } = useTodo();
 
   // Render individual task item
   const renderTask = ({ item }: any) => (

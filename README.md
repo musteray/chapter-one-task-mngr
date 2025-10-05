@@ -9,9 +9,15 @@ This app will allow users to add tasks, mark them as complete, and delete them
 2. macOS, Windows (Powershell and [WSL 2](https://github.com/expo/fyi/blob/main/wsl.md)), and Linux are supported.
 
 
-### Set up your local environment
+### Set up your local environment for Windows(Android Emulator)
 
-1. Follow [set up environment](https://docs.expo.dev/get-started/set-up-your-environment/) steps 
+1. Follow [set up environment](https://docs.expo.dev/get-started/set-up-your-environment/?mode=expo-go&buildEnv=local&platform=android&device=simulated) steps
+
+2. Select Androind Emulator(device)
+
+3. Select Expo Go
+
+4. Click Windows tab in Set up an Android Emulator with Expo Go section
 
 
 ### Get started
@@ -28,14 +34,7 @@ This app will allow users to add tasks, mark them as complete, and delete them
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+3. Press 'a' open Android
 
 
 ### Best practices
